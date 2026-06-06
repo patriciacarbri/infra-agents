@@ -1,24 +1,24 @@
-\## Como acessar seus serviços na VPS — Carbri
+## Como acessar seus serviços na VPS — Carbri
 
 
 
-\### Informações do servidor
+### Informações do servidor
 
 
 
-\- \*\*IP:\*\* `SEU\_IP\_VPS`
+- \*\*IP:\*\* `SEU\_IP\_VPS`
 
-\- \*\*Sistema:\*\* Ubuntu 22.04 LTS
+- \*\*Sistema:\*\* Ubuntu 22.04 LTS
 
-\- \*\*Usuário:\*\* root
-
-
-
-\---
+- \*\*Usuário:\*\* root
 
 
 
-\### Conectar ao servidor
+---
+
+
+
+### Conectar ao servidor
 
 
 
@@ -38,11 +38,10 @@ Digita a senha root quando pedir.
 
 
 
-\---
+---
 
 
-
-\### Acessar o n8n
+### Acessar o n8n
 
 
 
@@ -58,7 +57,7 @@ http://SEU\_IP\_VPS:5678
 
 
 
-\---
+---
 
 
 
@@ -72,11 +71,11 @@ Senha: SUA_SENHA
 
 
 
-\---
+---
 
 
 
-\### Segurança — Firewall
+### Segurança — Firewall
 
 
 
@@ -98,19 +97,15 @@ O firewall está ativo com as seguintes regras:
 
 
 
+---
 
 
 
-
-\---
-
-
-
-\### Troubleshooting
+### Troubleshooting
 
 
 
-\*\*O n8n não abre no navegador?\*\* Conecta ao servidor e rode:
+*\*O n8n não abre no navegador?\*\* Conecta ao servidor e rode:
 
 
 
@@ -122,7 +117,7 @@ cd \~/n8n \&\& docker compose up -d
 
 
 
-\*\*O Paperclip não está respondendo?\*\*
+*\*O Paperclip não está respondendo?\*\*
 
 
 
@@ -154,7 +149,7 @@ systemctl start paperclip
 
 
 
-\*\*Verifica em qual porta o Paperclip está escutando:\*\*
+*\*Verifica em qual porta o Paperclip está escutando:\*\*
 
 
 
@@ -182,15 +177,15 @@ ssh -L 3100:127.0.0.1:PORTA root@SEU\_IP\_VPS
 
 
 
-\*\*Erro "Address already in use" ao criar o túnel?\*\* Fecha todos os PowerShells abertos e abre um novo limpo antes de rodar o comando do túnel.
+*\*Erro "Address already in use" ao criar o túnel?\*\* Fecha todos os PowerShells abertos e abre um novo limpo antes de rodar o comando do túnel.
 
 
 
-\*\*Erro "ERR\_FAILED" no navegador mesmo com túnel aberto?\*\* O comando do túnel foi rodado dentro do servidor em vez do Windows local. Abre um PowerShell novo sem fazer nenhum `ssh` antes de rodar o comando do túnel.
+*\*Erro "ERR\_FAILED" no navegador mesmo com túnel aberto?\*\* O comando do túnel foi rodado dentro do servidor em vez do Windows local. Abre um PowerShell novo sem fazer nenhum `ssh` antes de rodar o comando do túnel.
 
 
 
-\*\*Verifica se o Paperclip está saudável sem abrir o navegador:\*\*
+*\*Verifica se o Paperclip está saudável sem abrir o navegador:\*\*
 
 
 
@@ -206,7 +201,7 @@ Deve retornar `"status":"ok"`.
 
 
 
-\*\*Reiniciar tudo do zero:\*\*
+*\*Reiniciar tudo do zero:\*\*
 
 
 
@@ -219,6 +214,32 @@ reboot
 
 
 Aguarda 60 segundos, reconecta via SSH e os serviços sobem automaticamente.
+
+---
+
+## Controle de Custos
+
+- Todos os agentes: Claude Haiku 4.5
+- ANTHROPIC_MODEL=claude-haiku-4-5-20251001 configurado no systemd e .bashrc do usuário paperclip
+- CEO pausado — usar manualmente apenas para direção estratégica
+- Meta: máximo $2/dia para 3 artigos semanais
+
+## Workflow de Publicação
+
+Após aprovação do Revisor, o n8n envia e-mail para patriciacarbri@gmail.com com:
+- Artigo completo
+- Post LinkedIn
+- Recomendações SEO
+
+Webhook n8n: https://n8n.patriciacarbri.com.br/webhook/publicar
+
+## Socat — ponte Docker para Paperclip
+
+O socat cria uma ponte entre a rede Docker e o Paperclip:
+- Escuta em 172.16.1.1:3100
+- Redireciona para 127.0.0.1:3100
+- Serviço: socat-paperclip
+- Verificar: systemctl status socat-paperclip
 
 
 
