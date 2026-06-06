@@ -241,5 +241,18 @@ O socat cria uma ponte entre a rede Docker e o Paperclip:
 - Serviço: socat-paperclip
 - Verificar: systemctl status socat-paperclip
 
+## Socat — configuração final
+
+Porta socat: 172.16.1.1:3099 → 127.0.0.1:3100
+Porta nginx interno: 3200 → 127.0.0.1:3100
+Paperclip sempre na: 127.0.0.1:3100
+
+Ordem de inicialização:
+1. Paperclip sobe na 3100
+2. Socat sobe na 3099 (após 10s delay)
+3. Nginx proxy na 80 e 3200
+
+Se der 502: verificar se paperclip está na 3100
+journalctl -u paperclip | grep "Server listening"
 
 
