@@ -62,43 +62,13 @@ http://SEU\_IP\_VPS:5678
 
 
 
-\### Acessar o Paperclip
+## Acesso ao Paperclip
 
+O Paperclip está acessível de qualquer lugar via:
+http://2.25.172.117
 
-
-O Paperclip sobe automaticamente com o servidor, mas precisa de um túnel SSH para acessar pelo navegador.
-
-
-
-\*\*Passo 1\*\* — Abre um PowerShell \*\*novo e limpo\*\* no Windows (sem conectar ao servidor antes).
-
-
-
-\*\*Passo 2\*\* — Cola o comando de túnel:
-
-
-
-```
-
-ssh -L 3100:127.0.0.1:3100 root@SEU\_IP\_VPS
-
-```
-
-
-
-\*\*Passo 3\*\* — Digita a senha quando pedir. Vai aparecer o prompt do servidor — \*\*deixa esse PowerShell aberto\*\* enquanto usar o Paperclip.
-
-
-
-\*\*Passo 4\*\* — Acessa no navegador:
-
-
-
-```
-
-http://localhost:3100
-
-```
+Usuário: SEUUSUARIO
+Senha: SUA_SENHA
 
 
 
